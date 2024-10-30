@@ -45,26 +45,11 @@ public class Tinnhan extends AppCompatActivity {
 
         apdapter_sms=new ArrayAdapter<>(Tinnhan.this,android.R.layout.simple_list_item_1,ds_sms);
         lv_sms.setAdapter((apdapter_sms));
-
-        if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.READ_CONTACTS) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_CONTACTS}, REQUEST_CODQ_ASK_PERMISSONS);
-        } else {
             showAllContacts();
-        }
+
     }
 
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == REQUEST_CODQ_ASK_PERMISSONS) {
-            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                showAllContacts();
-            } else {
-                Toast.makeText(this, "Quyền truy cập danh bạ bị từ chối", Toast.LENGTH_SHORT).show();
-            }
-        }
-    }
 
     private void showAllContacts() {
         Uri uri = Telephony.Sms.CONTENT_URI;
